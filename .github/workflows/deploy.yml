@@ -1,8 +1,8 @@
-name: Desplegar Pelican en GitHub Pages
+name: Desplegar Pelican a GitHub Pages
 
 on:
   push:
-    branches: ["main"]  # O "master", según el nombre de tu rama principal
+    branches: ["main"]
 
 permissions:
   contents: read
@@ -14,34 +14,29 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build-and-deploy:
+  deploy:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout del código
+      - name: Checkout del repositorio
         uses: actions/checkout@v4
 
       - name: Instalar uv
         uses: astral-sh/setup-uv@v3
-        with:
-          enable-cache: true
 
-      - name: Configurar Python
-        run: uv python install
-
-      - name: Instalar dependencias
+      - name: Configurar entorno con uv
         run: uv sync
 
-      - name: Compilar sitio con Pelican
+      - name: Compilar sitio con Pelican para producción
         run: uv run pelican content -s publishconf.py
 
-      - name: Subir artefacto para GitHub Pages
+      - name: Cargar artefacto de Pages
         uses: actions/upload-pages-artifact@v3
         with:
           path: 'output'
 
-      - name: Desplegar en GitHub Pages
+      - name: Publicar en GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
