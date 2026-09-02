@@ -28,8 +28,8 @@ DISPLAY_CATEGORIES_ON_MENU = False
 
 # Crear el menú principal de navegación de forma explícita
 MENUITEMS = (
-    ('Inicio', '/index.html'),
-    ('Syllabus', '/syllabus.html'),
+    ('Inicio', '/pystack-open/index.html'),
+    ('Syllabus', '/pystack-open/syllabus.html'),
 )
 
 # Blogroll
