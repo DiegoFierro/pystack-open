@@ -1,0 +1,8 @@
+[project]
+name = "pystack-open"
+version = "0.1.0"
+requires-python = ">=3.13"
+dependencies = [
+    "markdown>=3.10.3",
+    "pelican>=4.12.0",
+]
