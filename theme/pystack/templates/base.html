@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="{% block html_lang %}{{ DEFAULT_LANG }}{% endblock html_lang %}">
+<head>
+  {% block head %}
+  <meta charset="utf-8" />
+  <meta name="generator" content="Pelican" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}{{ SITENAME|striptags }}{% endblock title %}</title>
+  <meta name="description" content="{% block meta_description %}Curso práctico para construir aplicaciones Full Stack (Web, Móvil y Desktop) usando exclusivamente el ecosistema de Python.{% endblock meta_description %}" />
+
+  {% block canonical %}{% if page %}<link rel="canonical" href="{{ SITEURL }}/{{ page.url }}" />{% endif %}{% endblock canonical %}
+
+  {% block opengraph %}
+  <meta property="og:site_name" content="{{ SITENAME|striptags }}" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="{% block og_title %}{{ SITENAME|striptags }}{% endblock og_title %}" />
+  <meta property="og:description" content="{% block og_description %}Curso práctico de Full Stack con Python.{% endblock og_description %}" />
+  {% if page %}<meta property="og:url" content="{{ SITEURL }}/{{ page.url }}" />{% endif %}
+  <meta name="twitter:card" content="summary" />
+  {% endblock opengraph %}
+
+  <link rel="icon" href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/img/favicon.svg" type="image/svg+xml" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/css/style.css" />
+
+  {% if FEED_ALL_ATOM %}
+  <link href="{{ FEED_DOMAIN }}/{% if FEED_ALL_ATOM_URL %}{{ FEED_ALL_ATOM_URL }}{% else %}{{ FEED_ALL_ATOM }}{% endif %}" type="application/atom+xml" rel="alternate" title="{{ SITENAME|striptags }} — feed Atom" />
+  {% endif %}
+  {% endblock head %}
+</head>
+<body>
+  {% block body %}
+  <a class="skip-link" href="#main-content">Saltar al contenido</a>
+
+  <header class="site-header">
+    <div class="wrap site-header__row">
+      <a class="site-header__brand" href="{{ SITEURL }}/">
+        <span class="brand-mark" aria-hidden="true">&gt;_</span>
+        <span class="brand-name">{{ SITENAME }}</span>
+      </a>
+
+      {% block nav %}
+      <details class="site-nav">
+        <summary class="site-nav__toggle">Menú</summary>
+        <nav class="site-nav__list" aria-label="Navegación principal">
+          {% for title, link in MENUITEMS %}
+          {% set link_slug = link.rsplit('/', 1)[-1].rsplit('.', 1)[0] %}
+          <a href="{{ link }}"{% if page and (link.endswith(page.url) or page.url.startswith(link_slug ~ '/')) %} aria-current="page"{% endif %}>{{ title }}</a>
+          {% endfor %}
+          <a class="site-nav__repo" href="https://github.com/DiegoFierro/pystack-open" target="_blank" rel="noopener">Código fuente ↗</a>
+        </nav>
+      </details>
+      {% endblock nav %}
+    </div>
+  </header>
+
+  <main class="wrap" id="main-content">
+    {% block content %}{% endblock content %}
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap site-footer__row">
+      <p class="site-footer__about">
+        <strong>{{ SITENAME }}</strong> — un curso de código abierto para aprender Full Stack con Python.
+      </p>
+
+      {% if LINKS %}
+      <nav class="site-footer__links" aria-label="Enlaces del proyecto">
+        {% for name, link in LINKS %}
+        <a href="{{ link }}" target="_blank" rel="noopener">{{ name }}</a>
+        {% endfor %}
+      </nav>
+      {% endif %}
+
+      <p class="site-footer__credit">
+        Hecho con <a href="https://getpelican.com/" rel="nofollow">Pelican</a> y <a href="https://www.python.org/" rel="nofollow">Python</a>.
+      </p>
+    </div>
+  </footer>
+  {% endblock body %}
+</body>
+</html>

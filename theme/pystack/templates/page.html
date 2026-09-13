@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block html_lang %}{{ page.lang }}{% endblock html_lang %}
+
+{% block title %}{% if SITENAME|striptags in page.title %}{{ page.title|striptags }}{% else %}{{ page.title|striptags }} — {{ SITENAME|striptags }}{% endif %}{% endblock title %}
+
+{% block meta_description %}{{ page.summary|striptags }}{% endblock meta_description %}
+
+{% block og_title %}{{ page.title|striptags }}{% endblock og_title %}
+{% block og_description %}{{ page.summary|striptags }}{% endblock og_description %}
+
+{% block content %}
+<article class="page page--{{ page.slug }}">
+  {{ page.content }}
+</article>
+{% endblock content %}

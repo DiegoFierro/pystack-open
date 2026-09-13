@@ -3,6 +3,7 @@ Date: 2026-09-02
 Slug: index
 Save_as: index.html
 URL: index.html
+Summary: Curso práctico para construir aplicaciones Full Stack (Web, Móvil y Desktop) usando exclusivamente el ecosistema de Python: Django, FastAPI, HTMX y Flet.
 
 # PyStack Open
 

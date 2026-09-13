@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block html_lang %}{{ page.lang }}{% endblock html_lang %}
+{% block title %}{{ page.title|striptags }} — {{ SITENAME|striptags }}{% endblock title %}
+{% block meta_description %}{{ page.summary|striptags }}{% endblock meta_description %}
+{% block og_title %}{{ page.title|striptags }}{% endblock og_title %}
+{% block og_description %}{{ page.summary|striptags }}{% endblock og_description %}
+
+{% block content %}
+{% set modules = pages|selectattr("order", "defined")|sort(attribute="order") %}
+<article class="page page--syllabus">
+
+  <h1>{{ page.title }}</h1>
+  {{ page.content }}
+
+  <ol class="module-index">
+    {% for module in modules %}
+    <li class="module-index__item">
+      <a class="module-index__link" href="{{ SITEURL }}/{{ module.url }}">
+        <span class="module-index__number">{{ "%02d"|format(module.order|int) }}</span>
+        <span class="module-index__body">
+          <span class="module-index__title">{{ module.title|replace("Módulo " ~ (module.order|int) ~ ": ", "") }}</span>
+          <span class="module-index__summary">{{ module.summary|striptags }}</span>
+        </span>
+      </a>
+    </li>
+    {% endfor %}
+  </ol>
+
+</article>
+{% endblock content %}

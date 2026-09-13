@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block html_lang %}{{ page.lang }}{% endblock html_lang %}
+{% block title %}{{ page.title|striptags }} — {{ SITENAME|striptags }}{% endblock title %}
+{% block meta_description %}{{ page.summary|striptags }}{% endblock meta_description %}
+{% block og_title %}{{ page.title|striptags }}{% endblock og_title %}
+{% block og_description %}{{ page.summary|striptags }}{% endblock og_description %}
+
+{% block content %}
+<article class="page page--modulo">
+
+  <p class="breadcrumb">
+    <a href="{{ SITEURL }}/syllabus.html">Syllabus</a>
+    <span aria-hidden="true">/</span>
+    <span aria-current="page">Módulo {{ page.order|int }}</span>
+    {% if page.module_position %}
+    <span class="breadcrumb__count">{{ page.module_position }} de {{ page.module_count }}</span>
+    {% endif %}
+  </p>
+
+  <h1>{{ page.title }}</h1>
+
+  {{ page.content }}
+
+  <nav class="module-pager" aria-label="Navegación entre módulos">
+    {% if page.prev_module %}
+    <a class="module-pager__link module-pager__link--prev" href="{{ SITEURL }}/{{ page.prev_module.url }}">
+      <span class="module-pager__label">← Anterior</span>
+      <span class="module-pager__title">{{ page.prev_module.title }}</span>
+    </a>
+    {% else %}
+    <span></span>
+    {% endif %}
+
+    {% if page.next_module %}
+    <a class="module-pager__link module-pager__link--next" href="{{ SITEURL }}/{{ page.next_module.url }}">
+      <span class="module-pager__label">Siguiente →</span>
+      <span class="module-pager__title">{{ page.next_module.title }}</span>
+    </a>
+    {% endif %}
+  </nav>
+
+</article>
+{% endblock content %}

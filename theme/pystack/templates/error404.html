@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Página no encontrada — {{ SITENAME|striptags }}{% endblock title %}
+{% block meta_description %}{{ page.summary|striptags }}{% endblock meta_description %}
+
+{% block content %}
+<article class="page page--error">
+  <p class="error-code" aria-hidden="true">404</p>
+  <h1>{{ page.title }}</h1>
+  {{ page.content }}
+  <p class="error-actions">
+    <a href="{{ SITEURL }}/index.html">Volver al inicio</a>
+    <a href="{{ SITEURL }}/syllabus.html">Ver el syllabus</a>
+  </p>
+</article>
+{% endblock content %}

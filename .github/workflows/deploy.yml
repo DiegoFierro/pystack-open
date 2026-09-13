@@ -25,6 +25,9 @@ jobs:
 
       - name: Instalar uv
         uses: astral-sh/setup-uv@v3
+        with:
+          enable-cache: true
+          cache-dependency-glob: "uv.lock"
 
       - name: Configurar entorno con uv
         run: uv sync

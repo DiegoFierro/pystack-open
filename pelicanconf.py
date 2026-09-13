@@ -8,6 +8,26 @@ TIMEZONE = 'Europe/Rome'
 
 DEFAULT_LANG = 'es'
 
+# Tema propio (theme/pystack) en vez del tema "simple" por defecto de Pelican
+THEME = "theme/pystack"
+
+# Plugin propio, sin dependencias: genera sitemap.xml y robots.txt
+# (ver plugins/sitemap.py). Solo actúa si SITEURL es una URL absoluta,
+# así que en local (pelicanconf.py) no genera nada; en publishconf.py sí.
+PLUGIN_PATHS = ["plugins"]
+PLUGINS = ["sitemap", "module_nav"]
+
+# El extension "toc" no genera un índice visible por sí sola, pero le da
+# a cada encabezado (incluidos los "Módulo N" del syllabus) un id estable
+# para poder enlazarlos directamente, p. ej. syllabus.html#modulo-3
+MARKDOWN = {
+    "extension_configs": {
+        "markdown.extensions.extra": {},
+        "markdown.extensions.toc": {},
+    },
+    "output_format": "html5",
+}
+
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None
 CATEGORY_FEED_ATOM = None
@@ -32,21 +52,20 @@ MENUITEMS = (
     ('Syllabus', '/pystack-open/syllabus.html'),
 )
 
-# Blogroll
+# Enlaces del proyecto (se muestran en el footer, ver theme/pystack)
 LINKS = [
-    ("Pelican", "https://getpelican.com/"),
-    ("Python.org", "https://www.python.org/"),
-    ("Jinja2", "https://palletsprojects.com/p/jinja/"),
-    ("You can modify those links in your config file", "#"),
-]
-
-# Social widget
-SOCIAL = [
-    ("You can add links in your config file", "#"),
-    ("Another social link", "#"),
+    ("Diego Fierro", "https://diegofierro.github.io/"),
+    ("Código en GitHub", "https://github.com/DiegoFierro/pystack-open"),
+    #("Pelican", "https://getpelican.com/"),
+    #("Python.org", "https://www.python.org/"),
 ]
 
 DEFAULT_PAGINATION = False
+
+# Este sitio es solo páginas (sin blog), así que no generamos los listados
+# automáticos de artículos/categorías/tags/autores que Pelican crea por
+# defecto (evita archivos vacíos como blog_index.html, tags.html, etc.)
+DIRECT_TEMPLATES = []
 
 # Uncomment following line if you want document-relative URLs when developing
 # RELATIVE_URLS = True
